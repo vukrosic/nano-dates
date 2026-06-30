@@ -1,0 +1,33 @@
+{
+  "model_type": "nano-dates",
+  "architecture": "decoder-only transformer (pre-norm)",
+  "vocab_size": 256,
+  "tokenizer": "byte (raw UTF-8 bytes, no vocab file)",
+  "dim": 128,
+  "n_layers": 4,
+  "n_heads": 4,
+  "n_kv_heads": 2,
+  "head_dim": 32,
+  "ffn": "swiglu",
+  "ffn_mult": 4,
+  "norm": "rmsnorm",
+  "norm_eps": 1e-05,
+  "positional": "rope",
+  "rope_theta": 10000.0,
+  "max_seq_len": 64,
+  "tie_word_embeddings": true,
+  "params": 1016960,
+  "training": {
+    "task": "natural date phrase -> ISO 8601",
+    "data": "100% code-generated (answer sampled first, then rendered in 17 natural forms)",
+    "objective": "SFT, prompt-masked cross-entropy (only the 10-char ISO target is supervised)",
+    "steps": 12000,
+    "batch_size": 64,
+    "seq_len": 64,
+    "optimizer": "adamw",
+    "lr": 0.003,
+    "schedule": "cosine",
+    "warmup_steps": 200,
+    "final_val_loss": 0.0358
+  }
+}
